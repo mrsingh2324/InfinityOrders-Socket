@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
   });
   socket.on("error", (error) => {
     console.error(`Socket error: ${error.message}`);
-  });'
+  });
 
   // send and get message
   const messages = {}; // Object to track messages sent to each user
