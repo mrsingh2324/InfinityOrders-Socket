@@ -4,11 +4,12 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const server = http.createServer(app);
-const io = socketIO(server);
 
 require("dotenv").config({
   path: "./.env",
 });
+
+const io = require("socket.io")(server, { cors: { origin: "*" } });
 
 app.use(cors());
 app.use(express.json());
@@ -50,6 +51,9 @@ io.on("connection", (socket) => {
     addUser(userId, socket.id);
     io.emit("getUsers", users);
   });
+  socket.on("error", (error) => {
+    console.error(`Socket error: ${error.message}`);
+  });'
 
   // send and get message
   const messages = {}; // Object to track messages sent to each user
